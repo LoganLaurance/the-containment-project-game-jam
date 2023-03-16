@@ -8,7 +8,7 @@ public class playerMovement : MonoBehaviour
 {
     public GameObject player;
     public float runspeed = 5.0f;
-    public float health;
+    public float playerHealth;
     public Camera cam;
     Rigidbody2D rb;
     private float horizontal;

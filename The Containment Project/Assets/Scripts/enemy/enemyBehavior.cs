@@ -11,7 +11,7 @@ using UnityEngine;
 
 public class enemyBehavior : MonoBehaviour
 {
-    public GameObject player;
+    private GameObject player =  null;
     public float speed;
     public float enemyHealth;
     public float enemyDamage;
@@ -21,7 +21,10 @@ public class enemyBehavior : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+        if (player == null)
+        {
+            player = GameObject.Find("Player");
+        }
     }
 
     // Update is called once per frame
