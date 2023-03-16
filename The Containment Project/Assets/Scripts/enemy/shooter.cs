@@ -4,6 +4,12 @@ using UnityEngine;
 
 public class shooter : MonoBehaviour
 {
+    public Transform firePoint;
+    public GameObject bulletPrefab;
+
+    public float bulletForce = 5f;
+    public float bulletSpeed = 20f;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -13,6 +19,17 @@ public class shooter : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        if(Input.GetButtonDown("Fire1"))
+        {
+            Shoot();
+        }
+    }
+
+    void Shoot()
+    {
+        GameObject bullet = Instantiate(bulletPrefab, firePoint.position, firePoint.rotation);
+        Rigidbody2D rb = bullet.GetComponent<Rigidbody2D>();
+        rb.velocity = bulletSpeed * transform.up;
+        rb.AddForce(firePoint.up * bulletForce, ForceMode2D.Impulse);
     }
 }
