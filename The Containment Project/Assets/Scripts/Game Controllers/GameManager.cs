@@ -2,7 +2,7 @@
 //
 //  File: GameManager.cs
 //  By: Logan Laurance
-//  Last Edited: 3.15.2023
+//  Last Edited: 3.16.2023
 //  Description: Serves as mainly an interface with other scripts. Holds perma-perks and currency.
 //
 //------------------------------------------------------
@@ -42,13 +42,18 @@ public class GameManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+        // Set them to default when first loaded in.
+        permaHealthBoost = 1.0f;
+        permaSpeedBoost = 1.0f;
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+        if(ws == null)
+        {
+            ws = FindObjectOfType<WaveSpawner>();
+        }
     }
 
     public void SpawnPowerUp()
@@ -56,5 +61,13 @@ public class GameManager : MonoBehaviour
         Debug.Log("Spawning in temporary power ups.");
 
         // Spawn in temporary power ups.
+    }
+
+    public void PermaUpdatePlayerStats()
+    {
+        GameObject player = FindObjectOfType<playerMovement>().gameObject;
+
+        player.GetComponent<playerMovement>().maxPlayerHealth *= permaHealthBoost;
+        player.GetComponent<playerMovement>().runspeed *= permaSpeedBoost;
     }
 }

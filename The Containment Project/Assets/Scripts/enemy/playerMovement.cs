@@ -6,18 +6,37 @@ using UnityEngine;
 
 public class playerMovement : MonoBehaviour
 {
+    public static playerMovement Instance;
+
     public GameObject player;
     public float runspeed = 5.0f;
     public float playerHealth;
+    [HideInInspector]
+    public float maxPlayerHealth;
     public Camera cam;
     Rigidbody2D rb;
     private float horizontal;
     private float vertical;
     Vector2 mousePos;
+
+    private void Awake()
+    {
+        if (Instance)
+        {
+            Destroy(this);
+        }
+        else
+        {
+            Instance = this;
+            DontDestroyOnLoad(this);
+        }
+    }
     // Start is called before the first frame update
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
+
+        maxPlayerHealth = playerHealth;
     }
 
     // Update is called once per frame

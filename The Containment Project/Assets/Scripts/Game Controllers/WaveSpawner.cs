@@ -2,7 +2,7 @@
 //
 //  File: WaveSpawner.cs
 //  By: Logan Laurance
-//  Last Edited: 3.15.2023
+//  Last Edited: 3.16.2023
 //  Description: Handles spawning in and regulating enemy waves.
 //
 //------------------------------------------------------
@@ -49,9 +49,6 @@ public class WaveSpawner : MonoBehaviour
         }
         if(!isWaveFinished)
         {
-            // Figure out how to check all the current enemies we have spawned in.
-            // Send out waves in sections, not all together. Also send out individual waves over time so player is not
-            // immediately overwhelmed. (Keep looping with one type of wave)
             levelTimer -= Time.deltaTime;
             if (levelTimer <= 0.0f) // When player has survived the time limit.
             {
