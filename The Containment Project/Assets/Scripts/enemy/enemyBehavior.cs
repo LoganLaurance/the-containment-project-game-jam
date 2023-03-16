@@ -2,7 +2,6 @@
  * Name: Vanessa Wang
  * Date: 3/15/23
  * Desc: Makes an enemy chase the player
- * 
  */
 
 using System.Collections;
@@ -13,6 +12,8 @@ public class enemyBehavior : MonoBehaviour
 {
     public GameObject player;
     public float speed;
+    public float health;
+    public float damage;
 
     private float distance;
 
@@ -31,5 +32,14 @@ public class enemyBehavior : MonoBehaviour
         {
             transform.position = Vector2.MoveTowards(transform.position, player.transform.position, speed * Time.deltaTime);
         }
+
+        /*if (Collision2D.ReferenceEquals(transform.position, player.transform.position))
+        {
+            health -= 10;
+        }
+        if (health <= 0)
+        {
+            Destroy(gameObject);
+        }*/
     }
 }
