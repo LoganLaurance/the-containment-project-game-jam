@@ -17,7 +17,7 @@ public class WaveSpawner : MonoBehaviour
     [Tooltip("Parent GameObject that points to where all the enemies spawned in will be at.")]public GameObject spawnList;
     [Tooltip("Prefab list of all enemy types. Please order this from weakest to strongest.")]public List<GameObject> enemyPrefabs;
     [Min(1.0f)]
-    [Tooltip("Scalar value that is used to affect enemies stats. Defaulted to 1 to not accidentally make enemies weaker.")] public float scalar = 1.0f;
+    [Tooltip("Scalar value that is used to affect enemies stats. Defaulted to 1 for base enemy stats.")] public float scalar = 1.0f;
     #endregion
     #region [Private Variables]
     private GameManager gm; // For convenience
@@ -102,14 +102,18 @@ public class WaveSpawner : MonoBehaviour
                     break;
                 }
             }
-            if(randEnemy > enemyPrefabs.Count) // If larger than array size, we know it's at the end of array so set to end of array.
+            if(randEnemy >= enemyPrefabs.Count) // If larger than array size, we know it's at the end of array so set to end of array.
             {
                 randEnemy = enemyPrefabs.Count - 1;
             }
         }
         int randSpawnPos = Random.Range(0, spawnPosList.transform.childCount);
-        Instantiate(enemyPrefabs[randEnemy], spawnPositions[randSpawnPos].transform.position, 
+        GameObject enemy = Instantiate(enemyPrefabs[randEnemy], spawnPositions[randSpawnPos].transform.position, 
             Quaternion.identity, spawnList.transform);
+
+        // Spawn in enemy with scaled stats.
+        enemy.GetComponent<enemyBehavior>().enemyHealth *= scalar;
+        enemy.GetComponent<enemyBehavior>().enemyDamage *= scalar;
     }
 
     /// <summary>
@@ -117,15 +121,15 @@ public class WaveSpawner : MonoBehaviour
     /// </summary>
     private void ClearLevel()
     {
-        Debug.Log("Clearing level");
         isWaveFinished = true;
         // Destroy all enemies in the level.
         int spawnsLength = spawnList.transform.childCount;
         for(int i = 0; i < spawnsLength; i++)
         {
             Destroy(spawnList.transform.GetChild(i).gameObject);
-            Debug.Log("Removed enemy.");
         }
+
+        gm.SpawnPowerUp();
     }
 
     public void UpdateSpawnPositions()

@@ -22,6 +22,11 @@ public class GameManager : MonoBehaviour
     [Tooltip("Limits how many enemies are allowed on screen at once.")] public int enemyCap;
     #endregion
 
+    #region [Private Variables]
+    private WaveSpawner ws; // For convenience.
+    private float permaHealthBoost;
+    private float permaSpeedBoost;
+    #endregion
     private void Awake()
     {
         if(Instance)
@@ -44,5 +49,12 @@ public class GameManager : MonoBehaviour
     void Update()
     {
         
+    }
+
+    public void SpawnPowerUp()
+    {
+        Debug.Log("Spawning in temporary power ups.");
+
+        // Spawn in temporary power ups.
     }
 }
