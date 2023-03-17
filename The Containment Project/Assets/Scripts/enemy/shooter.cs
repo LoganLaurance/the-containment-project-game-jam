@@ -17,6 +17,7 @@ public class shooter : MonoBehaviour
     public float bulletDamage = 5f;
     public float shotDelay = 0.1f;
 
+    private float lastShot = 0;
     // Start is called before the first frame update
     void Start()
     {
@@ -24,11 +25,16 @@ public class shooter : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
-        if(Input.GetButtonDown("Fire1"))
+        if(Input.GetKey(KeyCode.Mouse0))
         {
-            Shoot();
+            lastShot += Time.deltaTime;
+            if(lastShot >= shotDelay)
+            {
+                Shoot();
+                lastShot = Time.deltaTime;
+            }
         }
     }
 

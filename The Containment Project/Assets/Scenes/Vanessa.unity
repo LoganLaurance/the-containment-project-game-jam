@@ -214,6 +214,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d137d82f85abe11418567ed8216c50ef, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  powerUps: []
   levelTimerLimit: 20
   waveDelay: 10
   spawnDelay: 0.6
@@ -733,7 +734,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 1
   enemyHealth: 15
-  enemyDamage: 0
+  enemyDamage: 10
   damageDelay: 1
 --- !u!50 &541777138
 Rigidbody2D:
@@ -1282,7 +1283,7 @@ GameObject:
   - component: {fileID: 2083397539}
   m_Layer: 0
   m_Name: Player
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1301,7 +1302,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   player: {fileID: 2083397532}
   runspeed: 5
-  playerHealth: 0
+  playerHealth: 50
   maxPlayerHealth: 0
   cam: {fileID: 1050833152}
 --- !u!50 &2083397534
@@ -1385,7 +1386,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2083397532}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 3.89, y: -0.97, z: 0}
+  m_LocalPosition: {x: 2.46, y: -0.84, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -1410,7 +1411,7 @@ MonoBehaviour:
   bulletForce: 1
   bulletSpeed: 20
   bulletDamage: 10
-  shotDelay: 0.1
+  shotDelay: 0.2
 --- !u!61 &2083397539
 BoxCollider2D:
   m_ObjectHideFlags: 0

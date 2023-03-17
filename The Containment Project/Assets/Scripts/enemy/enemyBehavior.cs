@@ -19,9 +19,11 @@ public class enemyBehavior : MonoBehaviour
     public float damageDelay = 1f;
 
     private shooter shooter;
+    private playerMovement playerMov;
 
     private float distance;
     private float bulletDmg;
+    private float dmgLast;
 
 
     // Start is called before the first frame update
@@ -32,6 +34,7 @@ public class enemyBehavior : MonoBehaviour
             player = GameObject.Find("Player");
         }
         shooter = player.GetComponent<shooter>();
+        playerMov = player.GetComponent<playerMovement>();
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
@@ -40,7 +43,17 @@ public class enemyBehavior : MonoBehaviour
         {
             enemyHealth = enemyHealth - shooter.bulletDamage;
         }
+        if (collision.gameObject.name == "Player")
+        {
+            dmgLast += Time.time;
+            if(dmgLast >= damageDelay)
+            {
+                playerMov.playerHealth = playerMov.playerHealth - enemyDamage;
+                dmgLast = Time.time;
+            }
+        }
     }
+    
 
     // Update is called once per frame
     void Update()
@@ -55,6 +68,11 @@ public class enemyBehavior : MonoBehaviour
         if (enemyHealth <= 0)
         {
             Destroy(gameObject);
+        }
+
+        if (playerMov.playerHealth <= 0)
+        {
+            Destroy(player);
         }
         
     }
