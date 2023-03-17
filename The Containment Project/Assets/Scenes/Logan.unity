@@ -152,7 +152,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d137d82f85abe11418567ed8216c50ef, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  powerUps: []
+  powerUps:
+  - {fileID: 6930764434966066099, guid: 1ccee80c094c5cc4891eae163aacacc3, type: 3}
   levelTimerLimit: 20
   waveDelay: 10
   spawnDelay: 0.6
@@ -740,6 +741,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Health PowerUp
       objectReference: {fileID: 0}
+    - target: {fileID: 6930764434966066099, guid: 1ccee80c094c5cc4891eae163aacacc3, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1ccee80c094c5cc4891eae163aacacc3, type: 3}
 --- !u!1001 &3766544890973839862
@@ -761,6 +766,14 @@ PrefabInstance:
       propertyPath: player
       value: 
       objectReference: {fileID: 307459184}
+    - target: {fileID: -1965976118624461522, guid: 1916384cf898a7844829d358e13bd6b3, type: 3}
+      propertyPath: playerHealth
+      value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 4860658484287557279, guid: 1916384cf898a7844829d358e13bd6b3, type: 3}
+      propertyPath: m_RootOrder
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6892164506868248572, guid: 1916384cf898a7844829d358e13bd6b3, type: 3}
       propertyPath: m_Name
       value: Player
@@ -822,6 +835,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Damage PowerUp
       objectReference: {fileID: 0}
+    - target: {fileID: 5415428673549259833, guid: 5db2abc697c97b64193e23b9436b3b0f, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6078632278765442219, guid: 5db2abc697c97b64193e23b9436b3b0f, type: 3}
       propertyPath: m_RootOrder
       value: 10
@@ -878,6 +895,10 @@ PrefabInstance:
     - target: {fileID: 8045752151980922053, guid: 8bbfb03cb6555a144a4acbaafb1b2b04, type: 3}
       propertyPath: m_Name
       value: Speed PowerUp
+      objectReference: {fileID: 0}
+    - target: {fileID: 8045752151980922053, guid: 8bbfb03cb6555a144a4acbaafb1b2b04, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 9028477297493807061, guid: 8bbfb03cb6555a144a4acbaafb1b2b04, type: 3}
       propertyPath: m_RootOrder
@@ -939,6 +960,10 @@ PrefabInstance:
     - target: {fileID: 572636027948607608, guid: 4eb9ace139a86a240bc9a743fcbeab80, type: 3}
       propertyPath: m_Name
       value: Enemy
+      objectReference: {fileID: 0}
+    - target: {fileID: 572636027948607608, guid: 4eb9ace139a86a240bc9a743fcbeab80, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8846729071601761146, guid: 4eb9ace139a86a240bc9a743fcbeab80, type: 3}
       propertyPath: m_RootOrder

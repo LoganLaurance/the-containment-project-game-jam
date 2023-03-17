@@ -2,7 +2,7 @@
 //
 //  File: GameManager.cs
 //  By: Logan Laurance
-//  Last Edited: 3.16.2023
+//  Last Edited: 3.17.2023
 //  Description: Serves as mainly an interface with other scripts. Holds perma-perks and currency.
 //
 //------------------------------------------------------
@@ -26,13 +26,17 @@ public class GameManager : MonoBehaviour
     #region [Private Variables]
     private WaveSpawner ws; // For convenience.
     private int currency;
+
     private float permaHealthBoost;
     private float permaSpeedBoost;
+    private float permaDamageBoost;
 
     private float playerMaxHealth;
     private float playerSpeed;
+    private float playerDamage;
     private float tempMaxPlayerHealth;
     private float tempPlayerSpeed;
+    private float tempPlayerDamage;
     #endregion
     private void Awake()
     {
@@ -57,8 +61,10 @@ public class GameManager : MonoBehaviour
 
         playerMaxHealth = player.GetComponent<playerMovement>().maxPlayerHealth;
         playerSpeed = player.GetComponent<playerMovement>().runspeed;
+        playerDamage = player.GetComponent<shooter>().bulletDamage;
         tempMaxPlayerHealth = player.GetComponent<playerMovement>().maxPlayerHealth;
         tempPlayerSpeed = player.GetComponent<playerMovement>().runspeed;
+        tempPlayerDamage = player.GetComponent<shooter>().bulletDamage;
     }
 
     // Update is called once per frame
@@ -99,28 +105,31 @@ public class GameManager : MonoBehaviour
         {
             if(transform.GetChild(i).gameObject.layer == 8) // If the object connected is marked as a PowerUp
             {
-                Destroy(transform.GetChild(i));
+                Destroy(transform.GetChild(i).gameObject);
             }
         }
     }
 
     public void UpdatePlayerPermaStats()
     {
-        playerMovement player = FindObjectOfType<playerMovement>();
+        GameObject player = FindObjectOfType<playerMovement>().gameObject;
 
         playerMaxHealth *= permaHealthBoost;
         playerSpeed *= permaSpeedBoost;
+        playerDamage *= permaDamageBoost;
 
-        player.maxPlayerHealth = playerMaxHealth;
-        player.playerHealth = playerMaxHealth;
-        player.runspeed = playerSpeed;
+        player.GetComponent<playerMovement>().maxPlayerHealth = playerMaxHealth;
+        player.GetComponent<playerMovement>().playerHealth = playerMaxHealth;
+        player.GetComponent<playerMovement>().runspeed = playerSpeed;
+        player.GetComponent<shooter>().bulletDamage = playerDamage;
     }
 
     public void UpdatePlayerTempStats()
     {
-        playerMovement player = FindObjectOfType<playerMovement>();
+        GameObject player = FindObjectOfType<playerMovement>().gameObject;
 
-        tempMaxPlayerHealth = player.maxPlayerHealth;
-        tempPlayerSpeed = player.runspeed;
+        tempMaxPlayerHealth = player.GetComponent<playerMovement>().maxPlayerHealth;
+        tempPlayerSpeed = player.GetComponent<playerMovement>().runspeed;
+        tempPlayerDamage = player.GetComponent<shooter>().bulletDamage;
     }
 }
