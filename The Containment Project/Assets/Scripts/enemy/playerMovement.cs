@@ -6,8 +6,6 @@ using UnityEngine;
 
 public class playerMovement : MonoBehaviour
 {
-    public static playerMovement Instance;
-
     public GameObject player;
     public float runspeed = 5.0f;
     public float playerHealth;
@@ -18,19 +16,6 @@ public class playerMovement : MonoBehaviour
     private float horizontal;
     private float vertical;
     Vector2 mousePos;
-
-    private void Awake()
-    {
-        if (Instance)
-        {
-            Destroy(this);
-        }
-        else
-        {
-            Instance = this;
-            DontDestroyOnLoad(this);
-        }
-    }
     // Start is called before the first frame update
     void Start()
     {
