@@ -13,6 +13,11 @@ using UnityEngine;
 public class WaveSpawner : MonoBehaviour
 {
     #region [Public Variables]
+    [Header("Wave Settings")]
+    [Tooltip("How long the player must survive in here to clear and prevent spawning in waves. Enter time in seconds.")] public float levelTimerLimit;
+    [Tooltip("The delay in between each wave spawn. Enter time in seconds.")] public float waveDelay;
+    [Tooltip("The delay in between when enemies spawn from each other in a given wave. Enter time in seconds.")] public float spawnDelay;
+    [Tooltip("Limits how many enemies are allowed on screen at once.")] public int enemyCap;
     [Tooltip("Parent GameObject that holds all spawning positions goes here.")] public GameObject spawnPosList;
     [Tooltip("Parent GameObject that points to where all the enemies spawned in will be at.")]public GameObject spawnList;
     [Tooltip("Prefab list of all enemy types. Please order this from weakest to strongest.")]public List<GameObject> enemyPrefabs;
@@ -25,8 +30,7 @@ public class WaveSpawner : MonoBehaviour
     private bool isWaveFinished = false;
     private float levelTimer;
     private float waveDelayTimer;
-    private float spawnDelay;
-    private int enemyCap;
+    private float spawnDelayTimer;
     #endregion
 
     // Start is called before the first frame update
@@ -34,10 +38,8 @@ public class WaveSpawner : MonoBehaviour
     {
         gm = GameManager.Instance;
 
-        levelTimer = gm.levelTimerLimit;
-        waveDelayTimer = gm.waveDelay - 2.0f; // Add 2 seconds of delay to the first wave spawn to have the player familiarize with the level.
-        spawnDelay = gm.spawnDelay;
-        enemyCap = gm.enemyCap;
+        levelTimer = levelTimerLimit;
+        waveDelayTimer = waveDelay - 2.0f; // Add 2 seconds of delay to the first wave spawn to have the player familiarize with the level.
     }
 
     // Update is called once per frame
@@ -56,7 +58,7 @@ public class WaveSpawner : MonoBehaviour
             }
 
             waveDelayTimer += Time.deltaTime;
-            if(waveDelayTimer >= gm.waveDelay)
+            if(waveDelayTimer >= waveDelay)
             {
                 StartCoroutine(SpawnNewWave());
                 waveDelayTimer = 0.0f;

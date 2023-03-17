@@ -16,11 +16,6 @@ public class GameManager : MonoBehaviour
     public static GameManager Instance;
     [Header("Power Ups")]
     [Tooltip("Provide all temporary power up prefabs in here.")]public List<GameObject> powerUps;
-    [Header("Wave Settings")]
-    [Tooltip("How long the player must survive in here to clear and prevent spawning in waves. Enter time in seconds.")]public float levelTimerLimit;
-    [Tooltip("The delay in between each wave spawn. Enter time in seconds.")]public float waveDelay;
-    [Tooltip("The delay in between when enemies spawn from each other in a given wave. Enter time in seconds.")] public float spawnDelay;
-    [Tooltip("Limits how many enemies are allowed on screen at once.")] public int enemyCap;
     #endregion
 
     #region [Private Variables]
