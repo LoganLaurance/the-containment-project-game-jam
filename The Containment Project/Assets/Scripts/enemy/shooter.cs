@@ -1,3 +1,8 @@
+/*
+ * Name: Vanessa Wang
+ * Date: 3/16/23
+ * Desc: Shoots bullets from the player
+ */
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -9,11 +14,13 @@ public class shooter : MonoBehaviour
 
     public float bulletForce = 5f;
     public float bulletSpeed = 20f;
+    public float bulletDamage = 5f;
+    public float shotDelay = 0.1f;
 
     // Start is called before the first frame update
     void Start()
     {
-        
+
     }
 
     // Update is called once per frame

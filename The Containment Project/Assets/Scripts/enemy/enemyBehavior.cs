@@ -12,11 +12,17 @@ using UnityEngine;
 public class enemyBehavior : MonoBehaviour
 {
     private GameObject player =  null;
+    private GameObject bullet;
     public float speed;
     public float enemyHealth;
     public float enemyDamage;
+    public float damageDelay = 1f;
+
+    private shooter shooter;
 
     private float distance;
+    private float bulletDmg;
+
 
     // Start is called before the first frame update
     void Start()
@@ -24,6 +30,15 @@ public class enemyBehavior : MonoBehaviour
         if (player == null)
         {
             player = GameObject.Find("Player");
+        }
+        shooter = player.GetComponent<shooter>();
+    }
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.gameObject.name == "Bullet(Clone)")
+        {
+            enemyHealth = enemyHealth - shooter.bulletDamage;
         }
     }
 
@@ -37,10 +52,10 @@ public class enemyBehavior : MonoBehaviour
             transform.position = Vector2.MoveTowards(transform.position, player.transform.position, speed * Time.deltaTime);
         }
 
-
         if (enemyHealth <= 0)
         {
             Destroy(gameObject);
         }
+        
     }
 }
