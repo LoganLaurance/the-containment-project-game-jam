@@ -311,7 +311,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 433560851}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -10.14, y: 1.36, z: 0}
+  m_LocalPosition: {x: -7.22, y: 0.45, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -475,7 +475,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 552429049}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.25, y: 8.53, z: 0}
+  m_LocalPosition: {x: 0.19, y: 6.58, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1146,7 +1146,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1263000228}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 10.86, y: 1.35, z: 0}
+  m_LocalPosition: {x: 7.88, y: 0.92, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1284,6 +1284,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   powerUps: []
+  resetStats: 0
+  inGame: 0
 --- !u!4 &1622564493
 Transform:
   m_ObjectHideFlags: 0
@@ -1461,9 +1463,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dd47b15bd213e7a4081f58dc31fe3e12, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  levelTimerLimit: 45
-  waveDelay: 12
-  spawnDelay: 0.6
+  levelTimerLimit: 60
+  waveDelay: 15
+  spawnDelay: 0.5
   enemyCap: 8
   spawnPosList: {fileID: 1178175527}
   spawnList: {fileID: 400214786}

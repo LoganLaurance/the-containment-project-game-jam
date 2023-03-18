@@ -1,4 +1,8 @@
-
+/*
+ * Name: Vanessa Wang
+ * Date: 3/15/23
+ * Desc: All things pertaining to the player (movement, stats)
+ */
 using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
@@ -34,6 +38,12 @@ public class playerMovement : MonoBehaviour
 
         //turning the mouse position from pixel values to actual coordinates i think
         mousePos = cam.ScreenToWorldPoint(Input.mousePosition);
+
+        /*if (dead = true)
+        {
+            
+        }*/
+
     }
 
     private void FixedUpdate()
