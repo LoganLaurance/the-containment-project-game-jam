@@ -1284,10 +1284,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   powerUps: []
-  levelTimerLimit: 45
-  waveDelay: 15
-  spawnDelay: 0.6
-  enemyCap: 10
 --- !u!4 &1622564493
 Transform:
   m_ObjectHideFlags: 0
@@ -1465,6 +1461,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dd47b15bd213e7a4081f58dc31fe3e12, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  levelTimerLimit: 45
+  waveDelay: 12
+  spawnDelay: 0.6
+  enemyCap: 8
   spawnPosList: {fileID: 1178175527}
   spawnList: {fileID: 400214786}
   enemyPrefabs:

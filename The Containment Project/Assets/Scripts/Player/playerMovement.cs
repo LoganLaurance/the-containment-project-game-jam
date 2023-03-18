@@ -15,6 +15,7 @@ public class playerMovement : MonoBehaviour
     Rigidbody2D rb;
     private float horizontal;
     private float vertical;
+    //private bool dead = false;
     Vector2 mousePos;
     // Start is called before the first frame update
     void Start()
