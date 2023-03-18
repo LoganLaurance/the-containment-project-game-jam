@@ -15,8 +15,8 @@ public class GameManager : MonoBehaviour
     #region [Public Variables]
     public static GameManager Instance;
     [Header("Power Ups")]
-    [Tooltip("Provide all temporary power up prefabs in here.")]public List<GameObject> powerUps;
-    [HideInInspector]public bool resetStats = false;
+    [Tooltip("Provide all temporary power up prefabs in here.")] public List<GameObject> powerUps;
+    [HideInInspector] public bool resetStats = false;
     [HideInInspector] public bool inGame = false;
     #endregion
 
@@ -29,16 +29,13 @@ public class GameManager : MonoBehaviour
     private float permaSpeedBoost;
     private float permaDamageBoost;
 
-    private float playerMaxHealth;
-    private float playerSpeed;
-    private float playerDamage;
-    private float tempMaxPlayerHealth;
-    private float tempPlayerSpeed;
-    private float tempPlayerDamage;
+    private float defPlayerMaxHealth;
+    private float defPlayerSpeed;
+    private float defPlayerDamage;
     #endregion
     private void Awake()
     {
-        if(Instance)
+        if (Instance)
         {
             Destroy(this);
         }
@@ -54,6 +51,7 @@ public class GameManager : MonoBehaviour
         // Set them to default when first loaded in.
         permaHealthBoost = 1.0f;
         permaSpeedBoost = 1.0f;
+        permaDamageBoost = 1.0f;
 
         player = null;
     }
@@ -61,15 +59,15 @@ public class GameManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(ws == null)
+        if (ws == null)
         {
             ws = FindObjectOfType<WaveSpawner>();
         }
-        if(player == null && inGame)
+        if (player == null && inGame)
         {
             player = FindObjectOfType<playerMovement>().gameObject;
         }
-        if(resetStats)
+        if (resetStats)
         {
             ResetPlayerStats();
         }
@@ -80,7 +78,7 @@ public class GameManager : MonoBehaviour
         Debug.Log("Spawning in temporary power ups.");
 
         // Spawn in temporary power ups and give currency.
-        if(powerUps == null)
+        if (powerUps == null)
         {
             Debug.LogError("Cannot spawn any power ups because our list is empty.");
             return;
@@ -88,21 +86,21 @@ public class GameManager : MonoBehaviour
         else
         {
             float pos = -(powerUps.Count / 2.0f) + 0.5f;
-            for(int i = 0; i < powerUps.Count; i++)
+            for (int i = 0; i < powerUps.Count; i++)
             {
                 Instantiate(powerUps[i], new Vector3(pos + i, 0.0f, 0.0f), Quaternion.identity, transform);
             }
         }
-        currency += 50;
+        currency += 50; // Temporary value placeholder.
     }
     /// <summary>
     /// Clears out remaining powerups. Should only be called when the player has selected a powerup.
     /// </summary>
     public void ClearPowerUps()
     {
-        for(int i = 0; i < transform.childCount; i++)
+        for (int i = 0; i < transform.childCount; i++)
         {
-            if(transform.GetChild(i).gameObject.layer == 8) // If the object connected is marked as a PowerUp
+            if (transform.GetChild(i).gameObject.layer == 8) // If the object connected is marked as a PowerUp
             {
                 Destroy(transform.GetChild(i).gameObject);
             }
@@ -111,41 +109,61 @@ public class GameManager : MonoBehaviour
 
     public void UpdatePlayerPermaStats()
     {
-        playerMaxHealth *= permaHealthBoost;
-        playerSpeed *= permaSpeedBoost;
-        playerDamage *= permaDamageBoost;
-
-        player.GetComponent<playerMovement>().maxPlayerHealth = playerMaxHealth;
-        player.GetComponent<playerMovement>().playerHealth = playerMaxHealth;
-        player.GetComponent<playerMovement>().runspeed = playerSpeed;
-        player.GetComponent<shooter>().bulletDamage = playerDamage;
-    }
-
-    public void UpdatePlayerTempStats()
-    {
-        tempMaxPlayerHealth = player.GetComponent<playerMovement>().maxPlayerHealth;
-        tempPlayerSpeed = player.GetComponent<playerMovement>().runspeed;
-        tempPlayerDamage = player.GetComponent<shooter>().bulletDamage;
+        player.GetComponent<playerMovement>().maxPlayerHealth = defPlayerMaxHealth * permaHealthBoost;
+        player.GetComponent<playerMovement>().runspeed = defPlayerSpeed * permaSpeedBoost;
+        player.GetComponent<shooter>().bulletDamage = defPlayerDamage * permaDamageBoost;
     }
 
     private void ResetPlayerStats()
     {
         if (player != null)
         {
-            resetStats = true;
+            resetStats = false;
 
             permaHealthBoost = 1.0f;
             permaSpeedBoost = 1.0f;
             permaDamageBoost = 1.0f;
 
-            playerMaxHealth = player.GetComponent<playerMovement>().maxPlayerHealth;
-            playerSpeed = player.GetComponent<playerMovement>().runspeed;
-            playerDamage = player.GetComponent<shooter>().bulletDamage;
-            tempMaxPlayerHealth = player.GetComponent<playerMovement>().maxPlayerHealth;
-            tempPlayerSpeed = player.GetComponent<playerMovement>().runspeed;
-            tempPlayerDamage = player.GetComponent<shooter>().bulletDamage;
+            defPlayerMaxHealth = player.GetComponent<playerMovement>().maxPlayerHealth;
+            defPlayerSpeed = player.GetComponent<playerMovement>().runspeed;
+            defPlayerDamage = player.GetComponent<shooter>().bulletDamage;
         }
         else
             Debug.LogError("Cannot find player and reset stats.");
     }
+    #region [Accessors And Mutators]
+    public int GetCurrency()
+    {
+        return currency;
+    }
+    public void SetCurrency(int value)
+    {
+        currency = value;
+    }
+    public void SetHealthBoost(float value)
+    {
+        permaHealthBoost = value;
+    }
+    public void SetSpeedBoost(float value)
+    {
+        permaSpeedBoost = value;
+    }
+    public void SetDamageBoost(float value)
+    {
+        permaDamageBoost = value;
+    }
+    public void AddPlayerHealth(float value)
+    {
+        player.GetComponent<playerMovement>().maxPlayerHealth += value;
+        player.GetComponent<playerMovement>().playerHealth = player.GetComponent<playerMovement>().maxPlayerHealth;
+    }
+    public void AddPlayerSpeed(float value)
+    {
+        player.GetComponent<playerMovement>().runspeed += value;
+    }
+    public void AddPlayerDamage(float value)
+    {
+        player.GetComponent<shooter>().bulletDamage += value;
+    }
+    #endregion
 }

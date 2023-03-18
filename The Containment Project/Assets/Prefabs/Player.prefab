@@ -134,7 +134,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   player: {fileID: 0}
   runspeed: 5
-  playerHealth: 0
+  playerHealth: 20
   maxPlayerHealth: 0
   cam: {fileID: 0}
 --- !u!114 &1707170076567083796

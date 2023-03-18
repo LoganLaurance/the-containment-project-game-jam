@@ -12,13 +12,22 @@ using UnityEngine;
 
 public class HealthPowerUp : PowerUp
 {
-    override public void UpdateStats()
+    override public void UpdateTempStats()
     {
-        playerMovement player = FindObjectOfType<playerMovement>();
+        gm.AddPlayerHealth(value);
+    }
 
-        player.maxPlayerHealth += value;
-        player.playerHealth = player.maxPlayerHealth;
-
-        GameManager.Instance.UpdatePlayerTempStats();
+    public override void UpdatePermaStats(int currency)
+    {
+        if(currency < price)
+        {
+            Debug.Log("Not enough currency to pay for this!");
+            return;
+        }
+        else
+        {
+            gm.SetCurrency(currency - price);
+            gm.SetHealthBoost(value);
+        }
     }
 }

@@ -30,7 +30,6 @@ public class WaveSpawner : MonoBehaviour
     private bool isWaveFinished = false;
     private float levelTimer;
     private float waveDelayTimer;
-    private float spawnDelayTimer;
     #endregion
 
     // Start is called before the first frame update
