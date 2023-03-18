@@ -16,10 +16,13 @@ public class GameManager : MonoBehaviour
     public static GameManager Instance;
     [Header("Power Ups")]
     [Tooltip("Provide all temporary power up prefabs in here.")]public List<GameObject> powerUps;
+    [HideInInspector]public bool resetStats = false;
+    [HideInInspector] public bool inGame = false;
     #endregion
 
     #region [Private Variables]
     private WaveSpawner ws; // For convenience.
+    private GameObject player; // For convenience.
     private int currency;
 
     private float permaHealthBoost;
@@ -52,14 +55,7 @@ public class GameManager : MonoBehaviour
         permaHealthBoost = 1.0f;
         permaSpeedBoost = 1.0f;
 
-        GameObject player = FindObjectOfType<playerMovement>().gameObject;
-
-        playerMaxHealth = player.GetComponent<playerMovement>().maxPlayerHealth;
-        playerSpeed = player.GetComponent<playerMovement>().runspeed;
-        playerDamage = player.GetComponent<shooter>().bulletDamage;
-        tempMaxPlayerHealth = player.GetComponent<playerMovement>().maxPlayerHealth;
-        tempPlayerSpeed = player.GetComponent<playerMovement>().runspeed;
-        tempPlayerDamage = player.GetComponent<shooter>().bulletDamage;
+        player = null;
     }
 
     // Update is called once per frame
@@ -68,6 +64,14 @@ public class GameManager : MonoBehaviour
         if(ws == null)
         {
             ws = FindObjectOfType<WaveSpawner>();
+        }
+        if(player == null && inGame)
+        {
+            player = FindObjectOfType<playerMovement>().gameObject;
+        }
+        if(resetStats)
+        {
+            ResetPlayerStats();
         }
     }
 
@@ -107,8 +111,6 @@ public class GameManager : MonoBehaviour
 
     public void UpdatePlayerPermaStats()
     {
-        GameObject player = FindObjectOfType<playerMovement>().gameObject;
-
         playerMaxHealth *= permaHealthBoost;
         playerSpeed *= permaSpeedBoost;
         playerDamage *= permaDamageBoost;
@@ -121,10 +123,29 @@ public class GameManager : MonoBehaviour
 
     public void UpdatePlayerTempStats()
     {
-        GameObject player = FindObjectOfType<playerMovement>().gameObject;
-
         tempMaxPlayerHealth = player.GetComponent<playerMovement>().maxPlayerHealth;
         tempPlayerSpeed = player.GetComponent<playerMovement>().runspeed;
         tempPlayerDamage = player.GetComponent<shooter>().bulletDamage;
+    }
+
+    private void ResetPlayerStats()
+    {
+        if (player != null)
+        {
+            resetStats = true;
+
+            permaHealthBoost = 1.0f;
+            permaSpeedBoost = 1.0f;
+            permaDamageBoost = 1.0f;
+
+            playerMaxHealth = player.GetComponent<playerMovement>().maxPlayerHealth;
+            playerSpeed = player.GetComponent<playerMovement>().runspeed;
+            playerDamage = player.GetComponent<shooter>().bulletDamage;
+            tempMaxPlayerHealth = player.GetComponent<playerMovement>().maxPlayerHealth;
+            tempPlayerSpeed = player.GetComponent<playerMovement>().runspeed;
+            tempPlayerDamage = player.GetComponent<shooter>().bulletDamage;
+        }
+        else
+            Debug.LogError("Cannot find player and reset stats.");
     }
 }
