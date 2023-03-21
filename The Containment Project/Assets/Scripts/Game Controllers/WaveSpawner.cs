@@ -23,6 +23,7 @@ public class WaveSpawner : MonoBehaviour
     [Tooltip("Prefab list of all enemy types. Please order this from weakest to strongest.")]public List<GameObject> enemyPrefabs;
     [Min(1.0f)]
     [Tooltip("Scalar value that is used to affect enemies stats. Defaulted to 1 for base enemy stats.")] public float scalar = 1.0f;
+    [Tooltip("How much currency this wave should give when completed.")] public int waveBonus;
     #endregion
     #region [Private Variables]
     private GameManager gm; // For convenience
@@ -127,7 +128,7 @@ public class WaveSpawner : MonoBehaviour
             Destroy(spawnList.transform.GetChild(i).gameObject);
         }
 
-        gm.SpawnPowerUp();
+        gm.SpawnPowerUp(waveBonus);
     }
 
     public void UpdateSpawnPositions()

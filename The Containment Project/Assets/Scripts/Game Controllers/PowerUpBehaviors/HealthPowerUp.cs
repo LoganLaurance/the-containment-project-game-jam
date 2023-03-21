@@ -27,7 +27,7 @@ public class HealthPowerUp : PowerUp
         else
         {
             gm.SetCurrency(currency - price);
-            gm.SetHealthBoost(value);
+            gm.AddHealthBoost(value);
         }
     }
 }

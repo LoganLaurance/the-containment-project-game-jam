@@ -15,7 +15,7 @@ public abstract class PowerUp : MonoBehaviour
 {
     [Tooltip("How much this powerup should cost.")] public int price;
     [Tooltip("Value that should be given to the player. If supposed to be a Permanent Perk, treat value as multiplier (i.e: " +
-        "1.05 for a 5% increase.) Otherwise, treat it as an additive value (i.e: 50 to increase stat by 50.)")]public float value;
+        "0.05 for a 5% increase.) Otherwise, treat it as an additive value (i.e: 50 to increase stat by 50.)")]public float value;
     [Tooltip("Check this if you intend this powerup to be a permanent powerup, otherwise leave it unchecked.")] public bool isPerma;
     protected GameObject player;
     protected GameManager gm; // For convenience.

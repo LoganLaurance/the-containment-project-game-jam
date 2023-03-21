@@ -27,7 +27,7 @@ public class DamagePowerUp : PowerUp
         else
         {
             gm.SetCurrency(currency - price);
-            gm.SetDamageBoost(value);
+            gm.AddDamageBoost(value);
         }
     }
 }

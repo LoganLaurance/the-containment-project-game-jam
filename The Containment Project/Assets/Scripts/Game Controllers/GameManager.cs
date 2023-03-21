@@ -17,7 +17,7 @@ public class GameManager : MonoBehaviour
     [Header("Power Ups")]
     [Tooltip("Provide all temporary power up prefabs in here.")] public List<GameObject> powerUps;
     [HideInInspector] public bool resetStats = false;
-    [HideInInspector] public bool inGame = false;
+    [HideInInspector] public bool inGame;
     #endregion
 
     #region [Private Variables]
@@ -54,6 +54,7 @@ public class GameManager : MonoBehaviour
         permaDamageBoost = 1.0f;
 
         player = null;
+        inGame = true;
     }
 
     // Update is called once per frame
@@ -73,7 +74,7 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    public void SpawnPowerUp()
+    public void SpawnPowerUp(int reward)
     {
         Debug.Log("Spawning in temporary power ups.");
 
@@ -88,10 +89,13 @@ public class GameManager : MonoBehaviour
             float pos = -(powerUps.Count / 2.0f) + 0.5f;
             for (int i = 0; i < powerUps.Count; i++)
             {
-                Instantiate(powerUps[i], new Vector3(pos + i, 0.0f, 0.0f), Quaternion.identity, transform);
+                if (powerUps[i].GetComponent<PowerUp>().isPerma == false) // Spawn only temporary.
+                {
+                    Instantiate(powerUps[i], new Vector3((pos + i) * 1.5f, 0.0f, 0.0f), Quaternion.identity, transform);
+                }
             }
         }
-        currency += 50; // Temporary value placeholder.
+        currency += reward;
     }
     /// <summary>
     /// Clears out remaining powerups. Should only be called when the player has selected a powerup.
@@ -140,17 +144,17 @@ public class GameManager : MonoBehaviour
     {
         currency = value;
     }
-    public void SetHealthBoost(float value)
+    public void AddHealthBoost(float value)
     {
-        permaHealthBoost = value;
+        permaHealthBoost += value;
     }
-    public void SetSpeedBoost(float value)
+    public void AddSpeedBoost(float value)
     {
-        permaSpeedBoost = value;
+        permaSpeedBoost += value;
     }
-    public void SetDamageBoost(float value)
+    public void AddDamageBoost(float value)
     {
-        permaDamageBoost = value;
+        permaDamageBoost += value;
     }
     public void AddPlayerHealth(float value)
     {

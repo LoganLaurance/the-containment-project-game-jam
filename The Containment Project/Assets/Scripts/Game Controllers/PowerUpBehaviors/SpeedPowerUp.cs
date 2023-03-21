@@ -27,7 +27,7 @@ public class SpeedPowerUp : PowerUp
         else
         {
             gm.SetCurrency(currency - price);
-            gm.SetSpeedBoost(value);
+            gm.AddSpeedBoost(value);
         }
     }
 }
