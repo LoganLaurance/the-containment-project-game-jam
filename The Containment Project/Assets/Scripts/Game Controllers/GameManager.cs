@@ -17,7 +17,6 @@ public class GameManager : MonoBehaviour
     [Header("Power Ups")]
     [Tooltip("Provide all temporary power up prefabs in here.")] public List<GameObject> powerUps;
     [HideInInspector] public bool resetStats = false;
-    [HideInInspector] public bool inGame;
     #endregion
 
     #region [Private Variables]
@@ -32,6 +31,10 @@ public class GameManager : MonoBehaviour
     private float defPlayerMaxHealth;
     private float defPlayerSpeed;
     private float defPlayerDamage;
+
+    private float tempPlayerMaxHealth;
+    private float tempPlayerSpeed;
+    private float tempPlayerDamage;
     #endregion
     private void Awake()
     {
