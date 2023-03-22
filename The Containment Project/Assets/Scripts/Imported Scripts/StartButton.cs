@@ -11,7 +11,6 @@ public class StartButton : MonoBehaviour
     public void LevelLoad()
     {
         GameManager.Instance.resetStats = true;
-        GameManager.Instance.inGame = true;
         SceneManager.LoadScene(LevelToLoad);
     }
 
