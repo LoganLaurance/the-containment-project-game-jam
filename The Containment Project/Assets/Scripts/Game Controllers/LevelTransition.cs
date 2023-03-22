@@ -19,6 +19,11 @@ public class LevelTransition : MonoBehaviour
     {
         gameObject.GetComponent<SpriteRenderer>().enabled = false;
         gameObject.GetComponent<BoxCollider2D>().enabled = false;
+
+        if(SceneManager.GetActiveScene().name == "Lobby")
+        {
+            EnableTriggers();
+        }
     }
 
     public void EnableTriggers()
@@ -31,6 +36,10 @@ public class LevelTransition : MonoBehaviour
     {
         if(collision.gameObject.layer == 7) // If player
         {
+            if(levelDestination != "Lobby") // If going to next level, then preserve temporary upgrades.
+            {
+                GameManager.Instance.changedLevels = true;
+            }
             SceneManager.LoadScene(levelDestination);
         }
     }

@@ -10,7 +10,7 @@ public class StartButton : MonoBehaviour
     // add this function to the button onclick in the editor
     public void LevelLoad()
     {
-        GameManager.Instance.resetStats = true;
+        GameManager.Instance.hardResetStats = true;
         SceneManager.LoadScene(LevelToLoad);
     }
 
