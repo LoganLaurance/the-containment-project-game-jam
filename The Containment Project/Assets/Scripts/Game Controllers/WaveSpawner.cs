@@ -17,7 +17,8 @@ public class WaveSpawner : MonoBehaviour
     [Tooltip("How long the player must survive in here to clear and prevent spawning in waves. Enter time in seconds.")] public float levelTimerLimit;
     [Tooltip("The delay in between each wave spawn. Enter time in seconds.")] public float waveDelay;
     [Tooltip("The delay in between when enemies spawn from each other in a given wave. Enter time in seconds.")] public float spawnDelay;
-    [Tooltip("Limits how many enemies are allowed on screen at once.")] public int enemyCap;
+    [Tooltip("How many enemies each wave should spawn.")] public int enemyWaveCap;
+    [Tooltip("Limits how many enemies are allowed on screen at once.")] public int enemyTotalCap;
     [Tooltip("Parent GameObject that holds all spawning positions goes here.")] public GameObject spawnPosList;
     [Tooltip("Parent GameObject that points to where all the enemies spawned in will be at.")]public GameObject spawnList;
     [Tooltip("Prefab list of all enemy types. Please order this from weakest to strongest.")]public List<GameObject> enemyPrefabs;
@@ -73,9 +74,12 @@ public class WaveSpawner : MonoBehaviour
             Debug.LogError("Cannot spawn in any enemies from an empty list.");
             yield break;
         }
-        for (int i = 0; i < enemyCap; i++)
+        for (int i = 0; i < enemyWaveCap; i++)
         {
-            SpawnEnemy();
+            if(spawnList.transform.childCount < enemyTotalCap)
+            {
+                SpawnEnemy();
+            }
             yield return new WaitForSeconds(spawnDelay);
         }
     }

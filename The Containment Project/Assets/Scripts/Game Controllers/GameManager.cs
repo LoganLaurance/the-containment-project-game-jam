@@ -98,7 +98,8 @@ public class GameManager : MonoBehaviour
         currency += reward;
     }
     /// <summary>
-    /// Clears out remaining powerups. Should only be called when the player has selected a powerup.
+    /// Clears out remaining powerups. Should only be called when the player has selected a powerup. Also enables the 
+    /// transition triggers.
     /// </summary>
     public void ClearPowerUps()
     {
@@ -108,6 +109,13 @@ public class GameManager : MonoBehaviour
             {
                 Destroy(transform.GetChild(i).gameObject);
             }
+        }
+
+        LevelTransition[] triggers = FindObjectsOfType<LevelTransition>();
+
+        for(int i = 0; i < triggers.Length; i++)
+        {
+            triggers[i].EnableTriggers();
         }
     }
 
