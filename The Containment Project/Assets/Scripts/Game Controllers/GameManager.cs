@@ -2,7 +2,7 @@
 //
 //  File: GameManager.cs
 //  By: Logan Laurance
-//  Last Edited: 3.17.2023
+//  Last Edited: 3.21.2023
 //  Description: Serves as mainly an interface with other scripts. Holds perma-perks and currency.
 //
 //------------------------------------------------------
@@ -54,7 +54,6 @@ public class GameManager : MonoBehaviour
         permaDamageBoost = 1.0f;
 
         player = null;
-        inGame = true;
     }
 
     // Update is called once per frame
@@ -64,11 +63,11 @@ public class GameManager : MonoBehaviour
         {
             ws = FindObjectOfType<WaveSpawner>();
         }
-        if (player == null && inGame)
+        if (player == null && FindObjectOfType<playerMovement>())
         {
             player = FindObjectOfType<playerMovement>().gameObject;
         }
-        if (resetStats)
+        if (resetStats && player != null)
         {
             ResetPlayerStats();
         }
@@ -128,20 +127,15 @@ public class GameManager : MonoBehaviour
 
     private void ResetPlayerStats()
     {
-        if (player != null)
-        {
-            resetStats = false;
+        resetStats = false;
 
-            permaHealthBoost = 1.0f;
-            permaSpeedBoost = 1.0f;
-            permaDamageBoost = 1.0f;
+        permaHealthBoost = 1.0f;
+        permaSpeedBoost = 1.0f;
+        permaDamageBoost = 1.0f;
 
-            defPlayerMaxHealth = player.GetComponent<playerMovement>().maxPlayerHealth;
-            defPlayerSpeed = player.GetComponent<playerMovement>().runspeed;
-            defPlayerDamage = player.GetComponent<shooter>().bulletDamage;
-        }
-        else
-            Debug.LogError("Cannot find player and reset stats.");
+        defPlayerMaxHealth = player.GetComponent<playerMovement>().maxPlayerHealth;
+        defPlayerSpeed = player.GetComponent<playerMovement>().runspeed;
+        defPlayerDamage = player.GetComponent<shooter>().bulletDamage;
     }
     #region [Accessors And Mutators]
     public int GetCurrency()
