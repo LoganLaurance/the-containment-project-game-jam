@@ -7,6 +7,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class playerMovement : MonoBehaviour
 {
@@ -19,7 +20,7 @@ public class playerMovement : MonoBehaviour
     Rigidbody2D rb;
     private float horizontal;
     private float vertical;
-    //private bool dead = false;
+    //public bool dead = false;
     Vector2 mousePos;
     // Start is called before the first frame update
     void Start()
@@ -39,10 +40,6 @@ public class playerMovement : MonoBehaviour
         //turning the mouse position from pixel values to actual coordinates i think
         mousePos = cam.ScreenToWorldPoint(Input.mousePosition);
 
-        /*if (dead = true)
-        {
-            
-        }*/
 
     }
 
@@ -56,5 +53,10 @@ public class playerMovement : MonoBehaviour
         //getting an angle that is just tangent so y/x of the vector (x, y)
         float angle = Mathf.Atan2(lookDir.y, lookDir.x) * Mathf.Rad2Deg - 90f;
         rb.rotation = angle;
+
+        //if (dead == true)
+        //{
+        //    SceneManager.LoadScene("DeathScreen");
+        //}
     }
 }

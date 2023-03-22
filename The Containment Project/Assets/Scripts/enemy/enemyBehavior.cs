@@ -58,23 +58,19 @@ public class enemyBehavior : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        //distance = Vector2.Distance(transform.position, player.transform.position);
-
-        //if (distance <= 10)
-        //{
             transform.position = Vector2.MoveTowards(transform.position, player.transform.position, speed * Time.deltaTime);
-        //}
 
-        if (enemyHealth <= 0)
-        {
-            Destroy(gameObject);
-        }
+            if (enemyHealth <= 0)
+            {
+                Destroy(gameObject);
+            }
 
-        if (playerMov.playerHealth <= 0)
-        {
-            Destroy(player);
-            //playerMov.dead = true;
-        }
+            if (playerMov.playerHealth <= 0)
+            {
+                Destroy(playerMov.player);
+                //playerMov.dead = true;
+            }
+        
         
     }
 }
