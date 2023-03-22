@@ -16,7 +16,8 @@ public class GameManager : MonoBehaviour
     public static GameManager Instance;
     [Header("Power Ups")]
     [Tooltip("Provide all temporary power up prefabs in here.")] public List<GameObject> powerUps;
-    [HideInInspector] public bool resetStats = false;
+    [HideInInspector] public bool hardResetStats = false;
+    [HideInInspector] public bool changedLevels = false;
     #endregion
 
     #region [Private Variables]
@@ -70,9 +71,13 @@ public class GameManager : MonoBehaviour
         {
             player = FindObjectOfType<playerMovement>().gameObject;
         }
-        if (resetStats && player != null)
+        if (hardResetStats && player != null)
         {
-            ResetPlayerStats();
+            HardResetPlayerStats();
+        }
+        if (changedLevels && player != null)
+        {
+            StartCoroutine(UpdatePlayerTempStats());
         }
     }
 
@@ -97,11 +102,18 @@ public class GameManager : MonoBehaviour
                 }
             }
         }
+
+        LevelTransition[] triggers = FindObjectsOfType<LevelTransition>();
+
+        for (int i = 0; i < triggers.Length; i++)
+        {
+            triggers[i].EnableTriggers();
+        }
+
         currency += reward;
     }
     /// <summary>
-    /// Clears out remaining powerups. Should only be called when the player has selected a powerup. Also enables the 
-    /// transition triggers.
+    /// Clears out remaining powerups. Should only be called when the player has selected a powerup.
     /// </summary>
     public void ClearPowerUps()
     {
@@ -112,25 +124,32 @@ public class GameManager : MonoBehaviour
                 Destroy(transform.GetChild(i).gameObject);
             }
         }
-
-        LevelTransition[] triggers = FindObjectsOfType<LevelTransition>();
-
-        for(int i = 0; i < triggers.Length; i++)
-        {
-            triggers[i].EnableTriggers();
-        }
     }
 
     public void UpdatePlayerPermaStats()
     {
         player.GetComponent<playerMovement>().maxPlayerHealth = defPlayerMaxHealth * permaHealthBoost;
+        player.GetComponent<playerMovement>().playerHealth = defPlayerMaxHealth * permaHealthBoost;
         player.GetComponent<playerMovement>().runspeed = defPlayerSpeed * permaSpeedBoost;
         player.GetComponent<shooter>().bulletDamage = defPlayerDamage * permaDamageBoost;
     }
 
-    private void ResetPlayerStats()
+    public IEnumerator UpdatePlayerTempStats()
     {
-        resetStats = false;
+        yield return new WaitForFixedUpdate();
+        Debug.Log("UpdatePlayerTempStats() called");
+        changedLevels = false;
+
+        player.GetComponent<playerMovement>().maxPlayerHealth = tempPlayerMaxHealth;
+        player.GetComponent<playerMovement>().playerHealth = tempPlayerMaxHealth;
+        player.GetComponent<playerMovement>().runspeed = tempPlayerSpeed;
+        player.GetComponent<shooter>().bulletDamage = tempPlayerDamage;
+    }
+
+    private void HardResetPlayerStats()
+    {
+        Debug.Log("HardResetPlayerStats() called");
+        hardResetStats = false;
 
         permaHealthBoost = 1.0f;
         permaSpeedBoost = 1.0f;
@@ -139,6 +158,10 @@ public class GameManager : MonoBehaviour
         defPlayerMaxHealth = player.GetComponent<playerMovement>().maxPlayerHealth;
         defPlayerSpeed = player.GetComponent<playerMovement>().runspeed;
         defPlayerDamage = player.GetComponent<shooter>().bulletDamage;
+
+        tempPlayerMaxHealth = defPlayerMaxHealth;
+        tempPlayerSpeed = defPlayerSpeed;
+        tempPlayerDamage = defPlayerDamage;
     }
     #region [Accessors And Mutators]
     public int GetCurrency()
