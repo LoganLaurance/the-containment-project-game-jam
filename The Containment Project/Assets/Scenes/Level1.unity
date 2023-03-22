@@ -237,6 +237,7 @@ MonoBehaviour:
   enemyPrefabs:
   - {fileID: 572636027948607608, guid: 4eb9ace139a86a240bc9a743fcbeab80, type: 3}
   scalar: 1
+  waveBonus: 0
 --- !u!4 &729707031
 Transform:
   m_ObjectHideFlags: 0
@@ -306,7 +307,7 @@ Camera:
   far clip plane: 1000
   field of view: 60
   orthographic: 1
-  orthographic size: 5
+  orthographic size: 8
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
