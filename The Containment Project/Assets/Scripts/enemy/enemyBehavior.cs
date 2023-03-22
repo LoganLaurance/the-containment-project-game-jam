@@ -64,12 +64,6 @@ public class enemyBehavior : MonoBehaviour
             {
                 Destroy(gameObject);
             }
-
-            if (playerMov.playerHealth <= 0)
-            {
-                Destroy(playerMov.player);
-                //playerMov.dead = true;
-            }
         
         
     }

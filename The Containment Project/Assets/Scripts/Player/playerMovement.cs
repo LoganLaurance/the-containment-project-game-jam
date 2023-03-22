@@ -54,9 +54,9 @@ public class playerMovement : MonoBehaviour
         float angle = Mathf.Atan2(lookDir.y, lookDir.x) * Mathf.Rad2Deg - 90f;
         rb.rotation = angle;
 
-        //if (dead == true)
-        //{
-        //    SceneManager.LoadScene("DeathScreen");
-        //}
+        if (playerHealth <= 0)
+        {
+            Destroy(player);
+        }
     }
 }
