@@ -8,6 +8,7 @@
 //------------------------------------------------------
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -80,7 +81,16 @@ public class GameManager : MonoBehaviour
             player = FindObjectOfType<playerMovement>().gameObject;
         }
 
-        UpdateWaveUIText();
+        if(currentCurrency != null && enemiesRemaining != null && ws != null)
+        {
+            UpdateWaveUIText();
+        }
+
+        if(health != null && speed != null && damage != null && waveTimer != null
+            && currentCurrency != null && enemiesRemaining != null)
+        {
+            UpdateUIStatsText();
+        }
     }
 
     private void FixedUpdate()
@@ -102,8 +112,8 @@ public class GameManager : MonoBehaviour
 
     private void UpdateWaveUIText()
     {
-        waveTimer.text = ws.levelTimer.ToString();
-        enemiesRemaining.text = ws.CurrentEnemiesSpawned().ToString();
+        waveTimer.text = Mathf.RoundToInt(ws.levelTimer).ToString();
+        enemiesRemaining.text = "Enemies: " + ws.CurrentEnemiesSpawned().ToString();
     }
 
     public void UpdateUIStatsText()
@@ -117,17 +127,17 @@ public class GameManager : MonoBehaviour
     private void GrabUIText()
     {
         Canvas canvas = FindObjectOfType<Canvas>();
-        if(canvas.transform.childCount < textElements) // If there is not enough elements in the canvas, don't grab them.
+        if(canvas.gameObject.transform.childCount < textElements) // If there is not enough elements in the canvas, don't grab them.
         {
             return;
         }
 
-        health = canvas.transform.GetChild(0).GetComponent<TMPro.TextMeshProUGUI>();
-        speed = canvas.transform.GetChild(1).GetComponent<TMPro.TextMeshProUGUI>();
-        damage = canvas.transform.GetChild(2).GetComponent<TMPro.TextMeshProUGUI>();
-        waveTimer = canvas.transform.GetChild(3).GetComponent<TMPro.TextMeshProUGUI>();
-        currentCurrency = canvas.transform.GetChild(4).GetComponent<TMPro.TextMeshProUGUI>();
-        enemiesRemaining = canvas.transform.GetChild(5).GetComponent<TMPro.TextMeshProUGUI>();
+        health = canvas.gameObject.transform.GetChild(0).GetComponent<TMPro.TextMeshProUGUI>();
+        speed = canvas.gameObject.transform.GetChild(1).GetComponent<TMPro.TextMeshProUGUI>();
+        damage = canvas.gameObject.transform.GetChild(2).GetComponent<TMPro.TextMeshProUGUI>();
+        waveTimer = canvas.gameObject.transform.GetChild(3).GetComponent<TMPro.TextMeshProUGUI>();
+        currentCurrency = canvas.gameObject.transform.GetChild(4).GetComponent<TMPro.TextMeshProUGUI>();
+        enemiesRemaining = canvas.gameObject.transform.GetChild(5).GetComponent<TMPro.TextMeshProUGUI>();
 
         Debug.Log("Please find a better method to do this before the project ends!");
     }
