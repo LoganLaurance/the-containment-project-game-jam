@@ -21,6 +21,7 @@ public class GameManager : MonoBehaviour
     [Tooltip("Provide all temporary power up prefabs in here.")] public List<GameObject> powerUps;
     [HideInInspector] public bool hardResetStats = false;
     [HideInInspector] public bool changedLevels = false;
+    [HideInInspector] public bool loseTempStats = false;
     #endregion
 
     #region [Private Variables]
@@ -80,14 +81,11 @@ public class GameManager : MonoBehaviour
         {
             player = FindObjectOfType<playerMovement>().gameObject;
         }
-
         if(currentCurrency != null && enemiesRemaining != null && ws != null)
         {
             UpdateWaveUIText();
         }
-
-        if(health != null && speed != null && damage != null && waveTimer != null
-            && currentCurrency != null && enemiesRemaining != null)
+        if(health != null && speed != null && damage != null && currentCurrency != null)
         {
             UpdateUIStatsText();
         }
@@ -103,6 +101,10 @@ public class GameManager : MonoBehaviour
         {
             HardResetPlayerStats();
         }
+        if(loseTempStats && player != null)
+        {
+            ResetTempStats();
+        }
         if (player != null && (health == null || speed == null || damage == null || waveTimer == null
             || currentCurrency == null || enemiesRemaining == null))
         {
@@ -112,15 +114,15 @@ public class GameManager : MonoBehaviour
 
     private void UpdateWaveUIText()
     {
-        waveTimer.text = Mathf.RoundToInt(ws.levelTimer).ToString();
+        waveTimer.text = ws.levelTimer.ToString("F0");
         enemiesRemaining.text = "Enemies: " + ws.CurrentEnemiesSpawned().ToString();
     }
 
     public void UpdateUIStatsText()
     {
-        health.text = "Health: " + player.GetComponent<playerMovement>().playerHealth.ToString();
-        speed.text = "Speed: " + player.GetComponent<playerMovement>().runspeed.ToString();
-        damage.text = "Damage: " + player.GetComponent<shooter>().bulletDamage.ToString();
+        health.text = "Health: " + player.GetComponent<playerMovement>().playerHealth.ToString("F0");
+        speed.text = "Speed: " + player.GetComponent<playerMovement>().runspeed.ToString("F2");
+        damage.text = "Damage: " + player.GetComponent<shooter>().bulletDamage.ToString("F2");
         currentCurrency.text = "Currency: " + currency.ToString();
     }
 
@@ -193,6 +195,8 @@ public class GameManager : MonoBehaviour
         player.GetComponent<playerMovement>().playerHealth = defPlayerMaxHealth * permaHealthBoost;
         player.GetComponent<playerMovement>().runspeed = defPlayerSpeed * permaSpeedBoost;
         player.GetComponent<shooter>().bulletDamage = defPlayerDamage * permaDamageBoost;
+
+        UpdateInternalTempStats();
     }
 
     public void UpdateInternalTempStats()
@@ -216,6 +220,17 @@ public class GameManager : MonoBehaviour
         player.GetComponent<playerMovement>().playerHealth = tempPlayerMaxHealth;
         player.GetComponent<playerMovement>().runspeed = tempPlayerSpeed;
         player.GetComponent<shooter>().bulletDamage = tempPlayerDamage;
+    }
+
+    public void ResetTempStats()
+    {
+        loseTempStats = false;
+
+        tempPlayerMaxHealth = defPlayerMaxHealth * permaHealthBoost;
+        tempPlayerSpeed = defPlayerSpeed * permaSpeedBoost;
+        tempPlayerDamage = defPlayerDamage * permaDamageBoost;
+
+        UpdatePlayerPermaStats();
     }
 
     private void HardResetPlayerStats()

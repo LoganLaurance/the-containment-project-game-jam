@@ -40,6 +40,10 @@ public class LevelTransition : MonoBehaviour
             {
                 GameManager.Instance.changedLevels = true;
             }
+            else
+            {
+                GameManager.Instance.loseTempStats = true;
+            }
             GameManager.Instance.ClearPowerUps();
             SceneManager.LoadScene(levelDestination);
         }
