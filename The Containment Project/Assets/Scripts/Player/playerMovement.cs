@@ -20,8 +20,8 @@ public class playerMovement : MonoBehaviour
     Rigidbody2D rb;
     private float horizontal;
     private float vertical;
-    private float x;
-    private float y;
+    //private float x;
+    //private float y;
 
     //public bool dead = false;
     Vector2 mousePos;
