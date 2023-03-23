@@ -9,11 +9,13 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
 {
     #region [Public Variables]
     public static GameManager Instance;
+    [Tooltip("How many text elements that we need for the game UI. This is a bad method to do!")]public int textElements = 6;
     [Header("Power Ups")]
     [Tooltip("Provide all temporary power up prefabs in here.")] public List<GameObject> powerUps;
     [HideInInspector] public bool hardResetStats = false;
@@ -24,6 +26,12 @@ public class GameManager : MonoBehaviour
     private WaveSpawner ws; // For convenience.
     private GameObject player; // For convenience.
     private int currency;
+    private TMPro.TextMeshProUGUI health;
+    private TMPro.TextMeshProUGUI speed;
+    private TMPro.TextMeshProUGUI damage;
+    private TMPro.TextMeshProUGUI waveTimer;
+    private TMPro.TextMeshProUGUI currentCurrency;
+    private TMPro.TextMeshProUGUI enemiesRemaining;
 
     private float permaHealthBoost;
     private float permaSpeedBoost;
@@ -71,10 +79,8 @@ public class GameManager : MonoBehaviour
         {
             player = FindObjectOfType<playerMovement>().gameObject;
         }
-        if (hardResetStats && player != null)
-        {
-            HardResetPlayerStats();
-        }
+
+        UpdateWaveUIText();
     }
 
     private void FixedUpdate()
@@ -83,6 +89,47 @@ public class GameManager : MonoBehaviour
         {
             UpdatePlayerTempStats();
         }
+        if (hardResetStats && player != null)
+        {
+            HardResetPlayerStats();
+        }
+        if (player != null && (health == null || speed == null || damage == null || waveTimer == null
+            || currentCurrency == null || enemiesRemaining == null))
+        {
+            GrabUIText();
+        }
+    }
+
+    private void UpdateWaveUIText()
+    {
+        waveTimer.text = ws.levelTimer.ToString();
+        enemiesRemaining.text = ws.CurrentEnemiesSpawned().ToString();
+    }
+
+    public void UpdateUIStatsText()
+    {
+        health.text = "Health: " + player.GetComponent<playerMovement>().playerHealth.ToString();
+        speed.text = "Speed: " + player.GetComponent<playerMovement>().runspeed.ToString();
+        damage.text = "Damage: " + player.GetComponent<shooter>().bulletDamage.ToString();
+        currentCurrency.text = "Currency: " + currency.ToString();
+    }
+
+    private void GrabUIText()
+    {
+        Canvas canvas = FindObjectOfType<Canvas>();
+        if(canvas.transform.childCount < textElements) // If there is not enough elements in the canvas, don't grab them.
+        {
+            return;
+        }
+
+        health = canvas.transform.GetChild(0).GetComponent<TMPro.TextMeshProUGUI>();
+        speed = canvas.transform.GetChild(1).GetComponent<TMPro.TextMeshProUGUI>();
+        damage = canvas.transform.GetChild(2).GetComponent<TMPro.TextMeshProUGUI>();
+        waveTimer = canvas.transform.GetChild(3).GetComponent<TMPro.TextMeshProUGUI>();
+        currentCurrency = canvas.transform.GetChild(4).GetComponent<TMPro.TextMeshProUGUI>();
+        enemiesRemaining = canvas.transform.GetChild(5).GetComponent<TMPro.TextMeshProUGUI>();
+
+        Debug.Log("Please find a better method to do this before the project ends!");
     }
 
     public void SpawnPowerUp(int reward)

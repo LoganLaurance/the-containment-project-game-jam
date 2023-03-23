@@ -25,12 +25,13 @@ public class WaveSpawner : MonoBehaviour
     [Min(1.0f)]
     [Tooltip("Scalar value that is used to affect enemies stats. Defaulted to 1 for base enemy stats.")] public float scalar = 1.0f;
     [Tooltip("How much currency this wave should give when completed.")] public int waveBonus;
+
+    [HideInInspector] public float levelTimer;
     #endregion
     #region [Private Variables]
     private GameManager gm; // For convenience
     private Transform[] spawnPositions;
     private bool isWaveFinished = false;
-    private float levelTimer;
     private float waveDelayTimer;
     #endregion
 
@@ -143,5 +144,10 @@ public class WaveSpawner : MonoBehaviour
         {
             spawnPositions[i] = spawnPosList.transform.GetChild(i).GetComponent<Transform>();
         }
+    }
+
+    public int CurrentEnemiesSpawned()
+    {
+        return spawnList.transform.childCount;
     }
 }
