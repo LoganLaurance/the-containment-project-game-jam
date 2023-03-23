@@ -35,7 +35,7 @@ public abstract class PowerUp : MonoBehaviour
     private void Update()
     {
         // If player is on powerup and attacks to select it, call UpdateStats and then clear everything else.
-        if(player != null && Input.GetButtonDown("Fire1"))
+        if(player != null && Input.GetKeyDown(KeyCode.E))
         {
             if(!isPerma)
             {
