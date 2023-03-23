@@ -15,6 +15,7 @@ public class SpeedPowerUp : PowerUp
     override public void UpdateTempStats()
     {
         gm.AddPlayerSpeed(value);
+        gm.UpdateInternalTempStats();
     }
 
     public override void UpdatePermaStats(int currency)
@@ -28,6 +29,7 @@ public class SpeedPowerUp : PowerUp
         {
             gm.SetCurrency(currency - price);
             gm.AddSpeedBoost(value);
+            gm.UpdatePlayerPermaStats();
         }
     }
 }

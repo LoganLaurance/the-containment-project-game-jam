@@ -75,9 +75,13 @@ public class GameManager : MonoBehaviour
         {
             HardResetPlayerStats();
         }
+    }
+
+    private void FixedUpdate()
+    {
         if (changedLevels && player != null)
         {
-            StartCoroutine(UpdatePlayerTempStats());
+            UpdatePlayerTempStats();
         }
     }
 
@@ -134,9 +138,20 @@ public class GameManager : MonoBehaviour
         player.GetComponent<shooter>().bulletDamage = defPlayerDamage * permaDamageBoost;
     }
 
-    public IEnumerator UpdatePlayerTempStats()
+    public void UpdateInternalTempStats()
     {
-        yield return new WaitForFixedUpdate();
+        if (player != null)
+        {
+            tempPlayerMaxHealth = player.GetComponent<playerMovement>().maxPlayerHealth;
+            tempPlayerSpeed = player.GetComponent<playerMovement>().runspeed;
+            tempPlayerDamage = player.GetComponent<shooter>().bulletDamage;
+        }
+        else
+            Debug.LogError("Player cannot be found.");
+    }
+
+    public void UpdatePlayerTempStats()
+    {
         Debug.Log("UpdatePlayerTempStats() called");
         changedLevels = false;
 

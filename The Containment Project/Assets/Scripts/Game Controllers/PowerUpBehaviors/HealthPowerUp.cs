@@ -15,6 +15,7 @@ public class HealthPowerUp : PowerUp
     override public void UpdateTempStats()
     {
         gm.AddPlayerHealth(value);
+        gm.UpdateInternalTempStats();
     }
 
     public override void UpdatePermaStats(int currency)
@@ -28,6 +29,7 @@ public class HealthPowerUp : PowerUp
         {
             gm.SetCurrency(currency - price);
             gm.AddHealthBoost(value);
+            gm.UpdatePlayerPermaStats();
         }
     }
 }

@@ -15,6 +15,7 @@ public class DamagePowerUp : PowerUp
     override public void UpdateTempStats()
     {
         gm.AddPlayerDamage(value);
+        gm.UpdateInternalTempStats();
     }
 
     public override void UpdatePermaStats(int currency)
@@ -28,6 +29,7 @@ public class DamagePowerUp : PowerUp
         {
             gm.SetCurrency(currency - price);
             gm.AddDamageBoost(value);
+            gm.UpdatePlayerPermaStats();
         }
     }
 }
