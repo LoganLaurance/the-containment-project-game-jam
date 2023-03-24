@@ -42,7 +42,7 @@ public class shooter : MonoBehaviour
     {
         GameObject bullet = Instantiate(bulletPrefab, firePoint.position, firePoint.rotation);
         Rigidbody2D rb = bullet.GetComponent<Rigidbody2D>();
-        rb.velocity = bulletSpeed * transform.up;
+        rb.velocity = bulletSpeed * transform.GetChild(0).transform.up;
         rb.AddForce(firePoint.up * bulletForce, ForceMode2D.Impulse);
     }
 }

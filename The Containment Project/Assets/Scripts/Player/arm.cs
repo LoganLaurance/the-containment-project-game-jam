@@ -12,10 +12,14 @@ using UnityEngine;
 public class arm : MonoBehaviour
 {
     public GameObject armPrefab;
-    //public GameObject player;
+    public GameObject player;
+
     private Rigidbody2D rb;
     Vector2 mousePos;
     public Camera cam;
+    private float horizontal;
+    private float vertical;
+    private float runspeed;
 
     // Start is called before the first frame update
     void Start()
