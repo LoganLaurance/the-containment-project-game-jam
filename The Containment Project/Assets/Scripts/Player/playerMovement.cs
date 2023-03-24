@@ -23,6 +23,10 @@ public class playerMovement : MonoBehaviour
     public float horizontal;
     [HideInInspector]
     public float vertical;
+    [HideInInspector]
+    public float x;
+    [HideInInspector]
+    public float y;
 
     Vector2 mousePos;
     // Start is called before the first frame update
@@ -51,14 +55,13 @@ public class playerMovement : MonoBehaviour
         //increasing the velocity of going in the direction of a vector at the set speed
         rb.velocity = new Vector2(horizontal * runspeed, vertical * runspeed);
 
-        /*
+        x = transform.position.x;
+        y = transform.position.y;
+
         //creating a vector from the player position to the mouse position
         Vector2 lookDir = mousePos - rb.position;
         //getting an angle that is just tangent so y/x of the vector (x, y)
         float angle = Mathf.Atan2(lookDir.y, lookDir.x) * Mathf.Rad2Deg - 90f;
-        rb.rotation = angle;
-        */
-        
 
         if (playerHealth <= 0)
         {
