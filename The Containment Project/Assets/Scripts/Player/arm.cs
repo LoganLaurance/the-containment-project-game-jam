@@ -36,12 +36,22 @@ public class arm : MonoBehaviour
 
     private void FixedUpdate()
     {
-        rb.velocity = new Vector2(playerMov.horizontal * playerMov.runspeed, playerMov.vertical * playerMov.runspeed);
         //creating a vector from the player position to the mouse position
-        Vector2 lookDir = mousePos - rb.position;
+        Vector2 lookDir = mousePos - (Vector2)transform.position;
         float angle = Mathf.Atan2(lookDir.y, lookDir.x) * Mathf.Rad2Deg - 90f;
-        rb.rotation = angle;
+        transform.eulerAngles = new Vector3(0.0f, 0.0f, angle);
 
+        float temp = Mathf.Abs(transform.localPosition.x);
+        if (playerMov.gameObject.transform.position.x < mousePos.x)
+        {
+            transform.localPosition = new Vector3(temp, transform.localPosition.y, transform.localPosition.x);
+            playerMov.gameObject.GetComponent<SpriteRenderer>().flipX = true;
+        }
+        else if(playerMov.gameObject.transform.position.x > mousePos.x)
+        {
+            transform.localPosition = new Vector3(temp * -1f, transform.localPosition.y, transform.localPosition.x);
+            playerMov.gameObject.GetComponent<SpriteRenderer>().flipX = false;
+        }
     }
 }
 

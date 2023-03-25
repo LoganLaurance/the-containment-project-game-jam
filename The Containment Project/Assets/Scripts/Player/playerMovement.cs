@@ -23,10 +23,15 @@ public class playerMovement : MonoBehaviour
     public float horizontal;
     [HideInInspector]
     public float vertical;
+
+    private float prevXpos;
+    private float prevYpos;
+
+    private bool moving;
     [HideInInspector]
-    public float x;
+    public bool movingX;
     [HideInInspector]
-    public float y;
+    public bool movingY;
 
     Vector2 mousePos;
     // Start is called before the first frame update
@@ -52,11 +57,18 @@ public class playerMovement : MonoBehaviour
 
     private void FixedUpdate()
     {
+        movingX = true;
+        movingY = true;
+        if (prevXpos == transform.position.x)
+        {
+            movingX = false;
+        }
+        if (prevYpos == transform.position.y)
+        {
+            movingY = false;
+        }
         //increasing the velocity of going in the direction of a vector at the set speed
         rb.velocity = new Vector2(horizontal * runspeed, vertical * runspeed);
-
-        x = transform.position.x;
-        y = transform.position.y;
 
         //creating a vector from the player position to the mouse position
         Vector2 lookDir = mousePos - rb.position;
@@ -67,5 +79,8 @@ public class playerMovement : MonoBehaviour
         {
             SceneManager.LoadScene("DeathScreen");
         }
+
+        prevXpos = transform.position.x;
+        prevYpos = transform.position.y;
     }
 }
