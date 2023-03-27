@@ -17,13 +17,18 @@ public class enemyBehavior : MonoBehaviour
     public float enemyHealth;
     public float enemyDamage;
     public float damageDelay = 1f;
+    public float knockbackDelay = 1f;
+    public float knockback;
 
     private shooter shooter;
     private playerMovement playerMov;
+    private Rigidbody2D rb;
 
     private float distance;
     private float bulletDmg;
     private float dmgLast;
+
+    private float knockbackLast;
 
 
     // Start is called before the first frame update
@@ -35,6 +40,7 @@ public class enemyBehavior : MonoBehaviour
         }
         shooter = player.GetComponent<shooter>();
         playerMov = player.GetComponent<playerMovement>();
+        rb = GetComponent<Rigidbody2D>();
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
@@ -42,6 +48,12 @@ public class enemyBehavior : MonoBehaviour
         if (collision.gameObject.name == "Bullet(Clone)")
         {
             enemyHealth = enemyHealth - shooter.bulletDamage;
+            knockbackLast += Time.time;
+            if (knockbackLast >= knockbackDelay)
+            {
+                rb.velocity = Vector3.zero;
+                knockbackLast = Time.time;
+            }
         }
         if (collision.gameObject.name == "Player")
         {
@@ -60,11 +72,20 @@ public class enemyBehavior : MonoBehaviour
     {
             transform.position = Vector2.MoveTowards(transform.position, player.transform.position, speed * Time.deltaTime);
 
-            if (enemyHealth <= 0)
+        if (playerMov.gameObject.transform.position.x < transform.position.x)
+        {
+            gameObject.GetComponent<SpriteRenderer>().flipX = true;
+        }
+        else if (playerMov.gameObject.transform.position.x > transform.position.x)
+        {
+            gameObject.GetComponent<SpriteRenderer>().flipX = false;
+        }
+
+        if (enemyHealth <= 0)
             {
                 Destroy(gameObject);
             }
         
-        
+            
     }
 }
