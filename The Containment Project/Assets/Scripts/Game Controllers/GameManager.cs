@@ -249,6 +249,8 @@ public class GameManager : MonoBehaviour
         tempPlayerMaxHealth = defPlayerMaxHealth;
         tempPlayerSpeed = defPlayerSpeed;
         tempPlayerDamage = defPlayerDamage;
+
+        currency = 0;
     }
     #region [Accessors And Mutators]
     public int GetCurrency()
