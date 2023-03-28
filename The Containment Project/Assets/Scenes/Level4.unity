@@ -122710,7 +122710,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dd47b15bd213e7a4081f58dc31fe3e12, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  levelTimerLimit: 210
+  levelTimerLimit: 180
   waveDelay: 15
   spawnDelay: 0.5
   enemyWaveCap: 25
@@ -122719,6 +122719,6 @@ MonoBehaviour:
   spawnList: {fileID: 1154890415}
   enemyPrefabs:
   - {fileID: 572636027948607608, guid: 4eb9ace139a86a240bc9a743fcbeab80, type: 3}
-  scalar: 1
-  waveBonus: 0
+  scalar: 4
+  waveBonus: 250
   levelTimer: 0
