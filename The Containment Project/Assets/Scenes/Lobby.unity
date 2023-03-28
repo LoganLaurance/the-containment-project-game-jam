@@ -183,11 +183,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 500718063561286765, guid: 1916384cf898a7844829d358e13bd6b3, type: 3}
       propertyPath: m_SortingOrder
-      value: 0
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 3969589217364072781, guid: 1916384cf898a7844829d358e13bd6b3, type: 3}
       propertyPath: m_SortingOrder
-      value: 0
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 5090538518130394245, guid: 1916384cf898a7844829d358e13bd6b3, type: 3}
       propertyPath: cam
@@ -1840,8 +1840,20 @@ PrefabInstance:
       value: AdvanceTrigger
       objectReference: {fileID: 0}
     - target: {fileID: 7417600982626850598, guid: de1fb02c93218114b94d9e202713857e, type: 3}
+      propertyPath: openState
+      value: 
+      objectReference: {fileID: 21300000, guid: bb674b3d69bf6e0459dc1fd40f0d50f6, type: 3}
+    - target: {fileID: 7417600982626850598, guid: de1fb02c93218114b94d9e202713857e, type: 3}
       propertyPath: levelDestination
       value: Level1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7417600982626850599, guid: de1fb02c93218114b94d9e202713857e, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 07feafc88cd37834691128b3833d6f28, type: 3}
+    - target: {fileID: 7417600982626850599, guid: de1fb02c93218114b94d9e202713857e, type: 3}
+      propertyPath: m_Color.a
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: de1fb02c93218114b94d9e202713857e, type: 3}

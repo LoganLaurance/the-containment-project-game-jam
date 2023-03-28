@@ -974,6 +974,18 @@ PrefabInstance:
       propertyPath: m_Name
       value: AdvanceTrigger
       objectReference: {fileID: 0}
+    - target: {fileID: 7417600982626850598, guid: de1fb02c93218114b94d9e202713857e, type: 3}
+      propertyPath: openState
+      value: 
+      objectReference: {fileID: 21300000, guid: da9ddf6b8ce6a7540ac41f705b30f85f, type: 3}
+    - target: {fileID: 7417600982626850599, guid: de1fb02c93218114b94d9e202713857e, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 87684cc6f05cab945a3c28f632f1d839, type: 3}
+    - target: {fileID: 7417600982626850599, guid: de1fb02c93218114b94d9e202713857e, type: 3}
+      propertyPath: m_Color.a
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: de1fb02c93218114b94d9e202713857e, type: 3}
 --- !u!1 &729707029
@@ -2815,8 +2827,20 @@ PrefabInstance:
       value: AdvanceTrigger (1)
       objectReference: {fileID: 0}
     - target: {fileID: 7417600982626850598, guid: de1fb02c93218114b94d9e202713857e, type: 3}
+      propertyPath: openState
+      value: 
+      objectReference: {fileID: 21300000, guid: bb674b3d69bf6e0459dc1fd40f0d50f6, type: 3}
+    - target: {fileID: 7417600982626850598, guid: de1fb02c93218114b94d9e202713857e, type: 3}
       propertyPath: levelDestination
       value: Level2
+      objectReference: {fileID: 0}
+    - target: {fileID: 7417600982626850599, guid: de1fb02c93218114b94d9e202713857e, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 07feafc88cd37834691128b3833d6f28, type: 3}
+    - target: {fileID: 7417600982626850599, guid: de1fb02c93218114b94d9e202713857e, type: 3}
+      propertyPath: m_Color.a
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: de1fb02c93218114b94d9e202713857e, type: 3}
