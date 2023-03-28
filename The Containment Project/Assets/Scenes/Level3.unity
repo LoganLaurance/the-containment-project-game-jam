@@ -1759,11 +1759,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7417600982626850594, guid: de1fb02c93218114b94d9e202713857e, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0.15
+      value: 0.07
       objectReference: {fileID: 0}
     - target: {fileID: 7417600982626850594, guid: de1fb02c93218114b94d9e202713857e, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -4.92
+      value: -4.48
       objectReference: {fileID: 0}
     - target: {fileID: 7417600982626850594, guid: de1fb02c93218114b94d9e202713857e, type: 3}
       propertyPath: m_LocalPosition.z
@@ -3353,7 +3353,7 @@ MonoBehaviour:
   spawnList: {fileID: 835378321}
   enemyPrefabs:
   - {fileID: 572636027948607608, guid: 4eb9ace139a86a240bc9a743fcbeab80, type: 3}
-  scalar: 3
+  scalar: 2
   waveBonus: 200
   levelTimer: 0
 --- !u!4 &1279421351
