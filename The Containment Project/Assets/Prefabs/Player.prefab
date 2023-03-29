@@ -235,6 +235,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   player: {fileID: 0}
   runspeed: 6
+  speedCap: 15
   playerHealth: 20
   maxPlayerHealth: 0
   cam: {fileID: 0}
