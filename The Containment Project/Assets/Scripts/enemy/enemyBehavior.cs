@@ -47,21 +47,27 @@ public class enemyBehavior : MonoBehaviour
     {
         if (collision.gameObject.name == "Bullet(Clone)")
         {
-            enemyHealth = enemyHealth - shooter.bulletDamage;
-            knockbackLast += Time.time;
-            if (knockbackLast >= knockbackDelay)
+            if (shooter != null)
             {
-                rb.velocity = Vector3.zero;
-                knockbackLast = Time.time;
+                enemyHealth = enemyHealth - shooter.bulletDamage;
+                knockbackLast += Time.time;
+                if (knockbackLast >= knockbackDelay)
+                {
+                    rb.velocity = Vector3.zero;
+                    knockbackLast = Time.time;
+                }
             }
         }
         if (collision.gameObject.name == "Player")
         {
             dmgLast += Time.time;
-            if(dmgLast >= damageDelay)
+            if (playerMov != null)
             {
-                playerMov.playerHealth = playerMov.playerHealth - enemyDamage;
-                dmgLast = Time.time;
+                if (dmgLast >= damageDelay)
+                {
+                    playerMov.playerHealth = playerMov.playerHealth - enemyDamage;
+                    dmgLast = Time.time;
+                }
             }
         }
     }
