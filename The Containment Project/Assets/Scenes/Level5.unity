@@ -4590,13 +4590,13 @@ MonoBehaviour:
   levelTimerLimit: 300
   waveDelay: 20
   spawnDelay: 0.3
-  enemyWaveCap: 45
-  enemyTotalCap: 550
+  enemyWaveCap: 40
+  enemyTotalCap: 450
   spawnPosList: {fileID: 1924956725}
   spawnList: {fileID: 659948064}
   enemyPrefabs:
   - {fileID: 572636027948607608, guid: 4eb9ace139a86a240bc9a743fcbeab80, type: 3}
-  scalar: 3.5
+  scalar: 5
   waveBonus: 300
   levelTimer: 0
 --- !u!4 &451338839
@@ -149842,6 +149842,14 @@ PrefabInstance:
       propertyPath: player
       value: 
       objectReference: {fileID: 566124203}
+    - target: {fileID: -1965976118624461522, guid: 1916384cf898a7844829d358e13bd6b3, type: 3}
+      propertyPath: playerHealth
+      value: 200
+      objectReference: {fileID: 0}
+    - target: {fileID: 1707170076567083796, guid: 1916384cf898a7844829d358e13bd6b3, type: 3}
+      propertyPath: bulletDamage
+      value: 30
+      objectReference: {fileID: 0}
     - target: {fileID: 5090538518130394245, guid: 1916384cf898a7844829d358e13bd6b3, type: 3}
       propertyPath: cam
       value: 

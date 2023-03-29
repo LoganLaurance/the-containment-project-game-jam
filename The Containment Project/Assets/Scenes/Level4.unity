@@ -121891,11 +121891,11 @@ MonoBehaviour:
   waveDelay: 15
   spawnDelay: 0.5
   enemyWaveCap: 25
-  enemyTotalCap: 500
+  enemyTotalCap: 350
   spawnPosList: {fileID: 1596305864}
   spawnList: {fileID: 1154890415}
   enemyPrefabs:
   - {fileID: 572636027948607608, guid: 4eb9ace139a86a240bc9a743fcbeab80, type: 3}
-  scalar: 2.5
+  scalar: 3.5
   waveBonus: 250
   levelTimer: 0

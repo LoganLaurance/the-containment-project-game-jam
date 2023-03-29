@@ -13,6 +13,7 @@ public class playerMovement : MonoBehaviour
 {
     public GameObject player;
     public float runspeed = 5.0f;
+    public float speedCap = 15f;
     public float playerHealth = 20;
     [HideInInspector]
     public float maxPlayerHealth;
@@ -56,5 +57,11 @@ public class playerMovement : MonoBehaviour
         {
             SceneManager.LoadScene("DeathScreen");
         }
+
+        if (runspeed > speedCap)
+        {
+            runspeed = speedCap;
+        }
+
     }
 }

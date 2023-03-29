@@ -100,7 +100,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   price: 20
-  value: 2
+  value: 5
   isPerma: 0
 --- !u!50 &-4269895607125160680
 Rigidbody2D:
