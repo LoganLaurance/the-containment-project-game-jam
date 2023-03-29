@@ -103,7 +103,7 @@ MonoBehaviour:
   enemyHealth: 15
   enemyDamage: 5
   damageDelay: 0.5
-  knockbackDelay: 3
+  knockbackDelay: 1
   knockback: 0
 --- !u!50 &-2921851144637801088
 Rigidbody2D:

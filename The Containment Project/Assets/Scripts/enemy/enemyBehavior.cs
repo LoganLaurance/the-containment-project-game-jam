@@ -43,20 +43,24 @@ public class enemyBehavior : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
     }
 
-    private void OnCollisionStay2D(Collision2D collision)
+    private void OnCollisionEnter2D(Collision2D collision)
     {
-    if (collision.gameObject.name == "Bullet(Clone)")
-    {
-        if (shooter != null)
+        if (collision.gameObject.name == "Bullet(Clone)")
         {
-            enemyHealth = enemyHealth - shooter.bulletDamage;
-            if (knockbackLast >= knockbackDelay)
+            if (shooter != null)
             {
-                rb.velocity = Vector3.zero;
-                knockbackLast = 0f;
+                enemyHealth = enemyHealth - shooter.bulletDamage;
+                if (knockbackLast >= knockbackDelay)
+                {
+                    rb.velocity = Vector3.zero;
+                    knockbackLast = 0f;
+                }
             }
         }
     }
+
+    private void OnCollisionStay2D(Collision2D collision)
+    {
     if (collision.gameObject.name == "Player")
     {
         if (playerMov != null)
