@@ -43,35 +43,32 @@ public class enemyBehavior : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
     }
 
-    private void OnCollisionEnter2D(Collision2D collision)
+    private void OnCollisionStay2D(Collision2D collision)
     {
-        if (collision.gameObject.name == "Bullet(Clone)")
+    if (collision.gameObject.name == "Bullet(Clone)")
+    {
+        if (shooter != null)
         {
-            if (shooter != null)
+            enemyHealth = enemyHealth - shooter.bulletDamage;
+            if (knockbackLast >= knockbackDelay)
             {
-                enemyHealth = enemyHealth - shooter.bulletDamage;
-                knockbackLast += Time.time;
-                if (knockbackLast >= knockbackDelay)
-                {
-                    rb.velocity = Vector3.zero;
-                    knockbackLast = Time.time;
-                }
-            }
-        }
-        if (collision.gameObject.name == "Player")
-        {
-            dmgLast += Time.time;
-            if (playerMov != null)
-            {
-                if (dmgLast >= damageDelay)
-                {
-                    playerMov.playerHealth = playerMov.playerHealth - enemyDamage;
-                    dmgLast = Time.time;
-                }
+                rb.velocity = Vector3.zero;
+                knockbackLast = 0f;
             }
         }
     }
-    
+    if (collision.gameObject.name == "Player")
+    {
+        if (playerMov != null)
+        {
+            if (dmgLast >= damageDelay)
+            {
+                playerMov.playerHealth = playerMov.playerHealth - enemyDamage;
+                dmgLast = 0f;
+            }
+        }
+    }
+}
 
     // Update is called once per frame
     void Update()
@@ -93,5 +90,11 @@ public class enemyBehavior : MonoBehaviour
             }
         
             
+    }
+
+    private void FixedUpdate()
+    {
+        dmgLast += Time.deltaTime;
+        knockbackLast += Time.deltaTime;
     }
 }

@@ -102,7 +102,7 @@ MonoBehaviour:
   speed: 1
   enemyHealth: 15
   enemyDamage: 5
-  damageDelay: 1
+  damageDelay: 0.5
   knockbackDelay: 3
   knockback: 0
 --- !u!50 &-2921851144637801088
