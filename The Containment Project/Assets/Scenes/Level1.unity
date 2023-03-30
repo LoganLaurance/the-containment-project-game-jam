@@ -1077,7 +1077,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dd47b15bd213e7a4081f58dc31fe3e12, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  levelTimerLimit: 30
+  levelTimerLimit: 20
   waveDelay: 10
   spawnDelay: 0.6
   enemyWaveCap: 10
