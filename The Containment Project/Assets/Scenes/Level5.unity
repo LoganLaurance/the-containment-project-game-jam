@@ -5576,7 +5576,7 @@ MonoBehaviour:
   spawnList: {fileID: 659948064}
   enemyPrefabs:
   - {fileID: 572636027948607608, guid: 4eb9ace139a86a240bc9a743fcbeab80, type: 3}
-  scalar: 5
+  scalar: 7.5
   waveBonus: 300
   levelTimer: 0
 --- !u!4 &451338839
