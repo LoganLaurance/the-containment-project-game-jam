@@ -25,11 +25,14 @@ public class playerMovement : MonoBehaviour
     [HideInInspector]
     public float vertical;
 
+    private Animator animator;
+
     Vector2 mousePos;
     // Start is called before the first frame update
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
+        animator = GetComponent<Animator>();
 
         maxPlayerHealth = playerHealth;
     }
@@ -40,7 +43,18 @@ public class playerMovement : MonoBehaviour
         //getting the axis so directions can be controlled via wasd or arrow keys
         horizontal = Input.GetAxisRaw("Horizontal");
         vertical = Input.GetAxisRaw("Vertical");
-
+        if(horizontal != 0.0f)
+        {
+            animator.SetFloat("isMoving", Mathf.Abs(horizontal));
+        }
+        else if(vertical != 0.0f)
+        {
+            animator.SetFloat("isMoving", Mathf.Abs(vertical));
+        }
+        else
+        {
+            animator.SetFloat("isMoving", 0.0f);
+        }
     }
 
     private void FixedUpdate()
