@@ -1664,9 +1664,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   levelTimerLimit: 50
-  waveDelay: 15
+  waveDelay: 10
   spawnDelay: 0.5
-  enemyWaveCap: 25
+  enemyWaveCap: 15
   enemyTotalCap: 75
   spawnPosList: {fileID: 1178175527}
   spawnList: {fileID: 400214786}
